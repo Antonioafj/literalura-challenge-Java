@@ -35,7 +35,9 @@
 
 - ``Java``
 - ``InteliJ IDEA``
-- ``Paradigma de orientação a objetos``
+- ``Srping Data JPA``
+- ``PostgresSQL``
+- ``Persitencia De Dados``
 - `` Gutendex ``
 
 
