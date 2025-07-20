@@ -35,7 +35,7 @@
 
 - ``Java``
 - ``InteliJ IDEA``
-- ``Srping Data JPA``
+- ``Spring Data JPA``
 - ``PostgresSQL``
 - ``Persitencia De Dados``
 - `` Gutendex ``
