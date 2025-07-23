@@ -10,9 +10,10 @@ public class Autor {
 
     private Integer anoFalecimento;
 
-    private List<Livro> livros;
+    private String livros;
 
-    public Autor(List<Livro> livros, DadosAutor dadosAutor ) {
+    public Autor(String livros, DadosAutor dadosAutor ) {
+        this.nome = dadosAutor.nome();
         this.anoNascimento = dadosAutor.anoNascimento();
         this.anoFalecimento = dadosAutor.anoFalecimento();
         this.livros = livros;
@@ -48,11 +49,11 @@ public class Autor {
         this.nome = nome;
     }
 
-    public List<Livro> getLivros() {
+    public String getLivros() {
         return livros;
     }
 
-    public void setLivros(List<Livro> livros) {
+    public void setLivros(String livros) {
         this.livros = livros;
     }
 

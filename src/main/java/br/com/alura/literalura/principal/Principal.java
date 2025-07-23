@@ -121,8 +121,8 @@ public class Principal {
 
     private void listarAutoresRegistrados() {
         List<Autor> autors= livros.stream()
-                .flatMap(l -> l.getAutores().stream())
-                .map(a -> new Autor(a.nome(), a.anoNascimento(), a.anoFalecimento()))
+                .flatMap(l -> l.getAutores().stream()
+                .map(a -> new Autor(l.getTitulo(), a)))
                 .collect(Collectors.toList());
 
 
@@ -131,7 +131,7 @@ public class Principal {
                                 "Titulo: " + t.getNome() +"\n"+
                                 "Ano de Nascimento: " + t.getAnoNascimento() +"\n"+
                                 "Ano de Falecimento: " + t.getAnoFalecimento()+"\n"+
-                                "Livros: " + livroAutor+"\n"));
+                                "Livros: " + t.getLivros()+"\n"));
 
     }
 
