@@ -13,34 +13,34 @@ public class Livro {
     public Livro() {
     }
 
-    public Livro( String titulo, List<DadosAutor> autores , List<String> idiomas, Integer downloads) {
+    public Livro(String titulo, List<DadosAutor> autores , List<String> idiomas, Integer downloads) {
         this.titulo = titulo;
         this.autores = autores;
         this.idiomas = idiomas;
         this.downloads = downloads;
     }
 
-    public Livro( DadosLivro dadosLivro) {
+    public Livro(DadosLivro dadosLivro) {
         this.titulo = dadosLivro.titulo();
         this.autores = dadosLivro.autores();
         this.idiomas = dadosLivro.idiomas();
         this.downloads = dadosLivro.downloads();
     }
 
-    public String getTitulo() {
+    public java.lang.String getTitulo() {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
+    public void setTitulo(java.lang.String titulo) {
         this.titulo = titulo;
     }
 
 
-    public List<String> getIdiomas() {
+    public List<java.lang.String> getIdiomas() {
         return idiomas;
     }
 
-    public void setIdiomas(List<String> idiomas) {
+    public void setIdiomas(List<java.lang.String> idiomas) {
         this.idiomas = idiomas;
     }
 
@@ -61,7 +61,7 @@ public class Livro {
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return  " titulo= " + titulo +
                 " autores= " + autores+
                 " idiomas= " + idiomas +

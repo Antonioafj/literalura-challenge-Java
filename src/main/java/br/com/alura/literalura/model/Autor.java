@@ -13,7 +13,6 @@ public class Autor {
     private List<Livro> livros;
 
     public Autor(List<Livro> livros, DadosAutor dadosAutor ) {
-        this.nome = dadosAutor.nome();
         this.anoNascimento = dadosAutor.anoNascimento();
         this.anoFalecimento = dadosAutor.anoFalecimento();
         this.livros = livros;
@@ -58,7 +57,7 @@ public class Autor {
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return  " nome= " + nome +
                 " Ano De Nascimento= " + anoNascimento +
                 " Ano De Falecimento= " + anoFalecimento +

@@ -8,7 +8,6 @@ import br.com.alura.literalura.service.ConverteDados;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,7 @@ public class Principal {
 
     private Scanner leitura = new Scanner(System.in);
 
-    private final String ENDERECO = "https://gutendex.com/books/?search=";
+    private final java.lang.String ENDERECO = "https://gutendex.com/books/?search=";
 
    private ConsumoApi consumoApi = new ConsumoApi();
 
@@ -24,9 +23,9 @@ public class Principal {
 
    private List<Livro> livros = new ArrayList<>();
 
-   private List<Autor> autor = new ArrayList<>();
+   private List<java.lang.String> livroAutor = new ArrayList<>();
 
-   private String nomeLivro;
+   private java.lang.String nomeLivro;
 
 
     public void exibeMenu(){
@@ -86,6 +85,7 @@ public class Principal {
 
 
         this.livros.add(l);
+        this.livroAutor.add(l.getTitulo());
 
     }
 
@@ -94,7 +94,7 @@ public class Principal {
         System.out.println( "Digite o nome do livro:");
         nomeLivro = leitura.nextLine();
 
-        String json = consumoApi.obterDados(ENDERECO + nomeLivro.replace(" ", "+").trim());
+        java.lang.String json = consumoApi.obterDados(ENDERECO + nomeLivro.replace(" ", "+").trim());
 
         BuscaLivro livro = converteDados.obterDados(json, BuscaLivro.class);
 
@@ -113,31 +113,65 @@ public class Principal {
                 System.out.println("\n--------LIVRO--------\n" +
                         "Titulo: " + l.getTitulo() +"\n"+
                         "Autor: " + l.getAutores().get(0).nome() +"\n"+
-                        "Idioma " + l.getIdiomas().get(0) +"\n"+
+                        "Idioma: " + l.getIdiomas().get(0) +"\n"+
                         "Número de downloads: " + l.getDownloads() +"\n"));
 
 
     }
 
     private void listarAutoresRegistrados() {
-        autor= livros.stream()
+        List<Autor> autors= livros.stream()
                 .flatMap(l -> l.getAutores().stream())
                 .map(a -> new Autor(a.nome(), a.anoNascimento(), a.anoFalecimento()))
                 .collect(Collectors.toList());
 
 
-                autor.forEach(t ->
+                 autors.forEach(t ->
                         System.out.println("\n--------LIVRO--------\n" +
                                 "Titulo: " + t.getNome() +"\n"+
                                 "Ano de Nascimento: " + t.getAnoNascimento() +"\n"+
                                 "Ano de Falecimento: " + t.getAnoFalecimento()+"\n"+
-                                "Livros: " + t.getLivros() +"\n"));
+                                "Livros: " + livroAutor+"\n"));
 
     }
 
     private void listarAutoresVivosAno() {
+        System.out.println("Digite o ano que deseja pesquisar:");
+        var ano = leitura.nextInt();
+
+        List<Autor> anoVivo = livros.stream()
+                .flatMap(l -> l.getAutores().stream())
+                .map(a -> new Autor(a.nome(), a.anoNascimento(), a.anoFalecimento()))
+                .distinct()
+                .filter(a -> a.getAnoNascimento() <= ano && (a.getAnoFalecimento() == 0 || a.getAnoFalecimento() >= ano))
+                .collect(Collectors.toList());
+
+                anoVivo.forEach(t ->
+                System.out.println("\n--------LIVRO--------\n" +
+                        "Titulo: " + t.getNome() +"\n"+
+                        "Ano de Nascimento: " + t.getAnoNascimento() +"\n"+
+                        "Ano de Falecimento: " + t.getAnoFalecimento()+"\n"+
+                        "Livros: " + t.getLivros() +"\n"));
     }
 
     private void listarLivrosIdioma() {
+        System.out.println("Insira o idioma para realizar a pesquisa:");
+        System.out.println("es - espanhol" +"\n"+
+                           "en - ingles" +"\n"+
+                           "fr - frances" +"\n"+
+                           "pt - portuques" +"\n");
+        var idioma = leitura.nextLine();
+
+        List<Livro> livroPorIdioma = livros.stream()
+                .filter(o -> o.getIdiomas().get(0).trim().equalsIgnoreCase(idioma.trim()))
+                .collect(Collectors.toList());
+
+        livroPorIdioma.forEach(l ->
+
+        System.out.println("\n--------LIVRO--------\n" +
+                "Titulo: " + l.getTitulo() +"\n"+
+                "Autor: " + l.getAutores().get(0).nome() +"\n"+
+                "Idioma: " + l.getIdiomas().get(0) +"\n"+
+                "Número de downloads: " + l.getDownloads() +"\n"));
     }
 }
