@@ -19,7 +19,7 @@ public class Livro {
         @JoinColumn(name = "autor_id")
         private Autor autor;
 
-        @ElementCollection
+        @ElementCollection(fetch = FetchType.EAGER)
         @CollectionTable(name = "livro_idiomas", joinColumns = @JoinColumn(name = "livro_id"))
         @Column(name = "idioma")
         private List<String> idiomas = new ArrayList<>();

@@ -178,7 +178,6 @@ public class Principal {
     private void listarAutoresVivosAno() {
         System.out.println("Digite o ano que deseja pesquisar:");
         var ano = leitura.nextInt();
-        leitura.nextInt();
 
         List<Autor> autoresVivos = autorRepository.findByAnoNascimentoLessThanEqualAndAnoFalecimentoGreaterThanEqual(ano, ano);
 
@@ -205,19 +204,19 @@ public class Principal {
                            "pt - portuques" +"\n");
         var idioma = leitura.nextLine();
 
-        Optional<Livro> livroPorIdioma = livroRepository.findByIdiomasContaining(idioma.trim().toLowerCase());
+        List<Livro> livrosPorIdioma = livroRepository.findByIdiomasContaining(idioma.trim().toLowerCase());
 
-        if (livroPorIdioma.isPresent()) {
-            Livro oLivro = livroPorIdioma.get();
-
-                    System.out.println("\n--------LIVRO--------\n" +
-                            "Titulo: " + oLivro.getTitulo() + "\n" +
-                            "Autor: " + (oLivro.getAutor() != null ? oLivro.getAutor().getNome() : "Autor Desconhecido") + "\n" +
-                            "Idioma: " + (oLivro.getIdiomas() != null && oLivro.getIdiomas().isEmpty() ? oLivro.getIdiomas().get(0) : "N/A") + "\n" +
-                            "Número de downloads: " + oLivro.getDownloads() + "\n");
-        }else {
-            System.out.println("Nenhum livro encontrado para o idioma" + idioma);
+        if (livrosPorIdioma.isEmpty()) {
+            System.out.println("Nenhum livro encontrado para o idioma '" + idioma + "' no banco de dados.");
+            return;
         }
+        livrosPorIdioma.forEach( l ->
+                    System.out.println("\n--------LIVRO--------\n" +
+                            "Titulo: " + l.getTitulo() + "\n" +
+                            "Autor: " + (l.getAutor() != null ? l.getAutor().getNome() : "Autor Desconhecido") + "\n" +
+                            "Idioma: " + (l.getIdiomas() != null && !l.getIdiomas().isEmpty() ? l.getIdiomas().get(0) : "N/A") + "\n" +
+                            "Número de downloads: " + l.getDownloads() + "\n"));
+
     }
 }
 
