@@ -1,8 +1,17 @@
 package br.com.alura.literalura.model;
 
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "autores")
 public class Autor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nome;
 
@@ -10,19 +19,39 @@ public class Autor {
 
     private Integer anoFalecimento;
 
-    private String livros;
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Livro> livros = new ArrayList<>();
 
-    public Autor(String livros, DadosAutor dadosAutor ) {
+    public Autor() {
+    }
+
+    public Autor( DadosAutor dadosAutor ) {
         this.nome = dadosAutor.nome();
         this.anoNascimento = dadosAutor.anoNascimento();
         this.anoFalecimento = dadosAutor.anoFalecimento();
-        this.livros = livros;
     }
 
     public Autor(String nome, Integer anoNascimento, Integer anoFalecimento) {
         this.nome = nome;
         this.anoNascimento = anoNascimento;
         this.anoFalecimento = anoFalecimento;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(List<Livro> livros) {
+        livros.forEach(l -> l.setAutor(this) );
+        this.livros = livros;
     }
 
     public Integer getAnoFalecimento() {
@@ -49,20 +78,12 @@ public class Autor {
         this.nome = nome;
     }
 
-    public String getLivros() {
-        return livros;
-    }
-
-    public void setLivros(String livros) {
-        this.livros = livros;
-    }
 
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return  " nome= " + nome +
                 " Ano De Nascimento= " + anoNascimento +
-                " Ano De Falecimento= " + anoFalecimento +
-                " Livros= " + livros;
+                " Ano De Falecimento= " + anoFalecimento ;
 
     }
 }
