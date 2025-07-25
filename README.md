@@ -1,7 +1,7 @@
 # LiterAlura - ONE -Java Back End <img width="850" height="250" alt="literalura" src="https://github.com/user-attachments/assets/07f1d756-daa5-4d50-bbc9-1bb40f862d72" />
 
 
-![Static Badge](https://img.shields.io/badge/Status-Em_Desenvolvimento-blue)
+![Static Badge](https://img.shields.io/badge/Status-FINALIZADO-blue)
 ![Static Badge](https://img.shields.io/badge/API_Usada-Gutendex-green)
 ![Static Badge](https://img.shields.io/badge/Challenge_ONE-Java_Back_End_Alura-00FF00)
 
@@ -15,7 +15,7 @@
   
 * [Status do Projeto](#status-do-Projeto)
   
-  :clap: Em Andamento!! :muscle:
+  :clap: FinaliZado!! :muscle:
 
 * [Funcionalidades e Demonstração da Aplicação](#funcionalidades-e-demonstração-da-aplicação)
 
@@ -24,7 +24,7 @@
   - `1`: Acesso a mais de 70 mil livros .
 
  
-  :clap: Em Andamento!! :muscle:
+![literalura_gif_c](https://github.com/user-attachments/assets/df3e13e2-14d8-4e92-acfa-22e1efaf19cb)
 
 
 * [Acesso ao Projeto](#acesso-ao-projeto)
